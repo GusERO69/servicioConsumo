@@ -5,7 +5,7 @@ const hostname = '0.0.0.0';
 const port = 8094;
 const server = createServer((req, res) => {
   res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
+  res.setHeader('Content-Type', 'text/html');
   const htmlContent = readFileSync(resolve(__dirname, 'index.html'), 'utf8');
   res.end(htmlContent);
 });
