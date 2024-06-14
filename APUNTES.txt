@@ -1,1 +1,5 @@
 NOS TOCA EL PUERTO 8094
+
+
+const hostname = "0.0.0.0";
+const port = 8094;
