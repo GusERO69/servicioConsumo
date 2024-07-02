@@ -17,7 +17,7 @@ except pymysql.MySQLError as e:
     print(f"Error al conectar a la base de datos: {e}")
 
 cursor = conn.cursor()
-query = "SELECT adc_value, voltage, current, power FROM home"
+query = "SELECT voltage, current, power FROM home"
 cursor.execute(query)
 
 # Obtener todos los resultados
@@ -54,11 +54,11 @@ y = []
 #     -0.00435619,
 # ])
 for row in results:
-    X.append([row[0], row[1], row[2]])
-    y.append(row[3])
+    X.append([row[0], row[1]])
+    y.append(row[2])
 
-print(len(X))
-print(len(y))
+print('datos X', len(X))
+print('datos Y', len(y))
 
 
 # Crear y entrenar el modelo
@@ -70,6 +70,6 @@ y_pred = model.predict(X)
 
 # Predicción con nuevos datos
 # Nuevos datos para predicción [ADC Value, Voltage, Current]
-new_data = [[-5,-0.000625019,-0.01894]]
+new_data = [[-0.000625019,-0.01894]]
 prediction = model.predict(new_data)
-print(f"Predicción para [-5,-0.000625019,-0.01894]: {prediction}")
+print(f"Predicción para [-0.000625019,-0.01894]: {prediction}")
