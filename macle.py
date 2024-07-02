@@ -7,10 +7,10 @@ import pymysql
 # Conectar a la base de datos MySQL
 try:
     conn = pymysql.connect(
-        host='localhost',        # Por ejemplo, 'localhost' si es local
-        user='root',     # Tu usuario de la base de datos
-        password='123456', # Tu contraseña de la base de datos
-        database='energy_monitor' # El nombre de tu base de datos
+        host='localhost',
+        user='root',
+        password='123456',
+        database='energy_monitor'
     )
     print("Conectado a la base de datos MySQL")
 except pymysql.MySQLError as e:
