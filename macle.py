@@ -17,14 +17,14 @@ except pymysql.MySQLError as e:
     print(f"Error al conectar a la base de datos: {e}")
 
 cursor = conn.cursor()
-query = "SELECT voltage, current, power, timestamp FROM Lectura"
+query = "SELECT power, timestamp FROM Lectura"
 cursor.execute(query)
 
 results = cursor.fetchall()
 
 conn.close()
 
-df = pd.DataFrame(results, columns=['voltage', 'current', 'power', 'timestamp'])
+df = pd.DataFrame(results, columns=['power', 'timestamp'])
 
 df['timestamp'] = pd.to_datetime(df['timestamp'])
 
@@ -32,11 +32,14 @@ df['year'] = df['timestamp'].dt.year
 df['month'] = df['timestamp'].dt.month
 df['day'] = df['timestamp'].dt.day
 
-X = df[['day', 'month', 'year', 'voltage', 'current']]
+X = df[['day', 'month', 'year']]
 y = df['power']
 
 print('datos X', len(X))
 print('datos Y', len(y))
+
+print('EQUIS', X)
+print('YE', y)
 
 
 # Crear y entrenar el modelo
@@ -47,6 +50,6 @@ model.fit(X, y)
 y_pred = model.predict(X)
 
 # Predicción con nuevos datos
-new_data = pd.DataFrame([[3, 7, 2024, 0.4991232, 22.29012]], columns=['day', 'month', 'year', 'voltage', 'current'])
+new_data = pd.DataFrame([[19, 7, 2024]], columns=['day', 'month', 'year'])
 prediction = model.predict(new_data)
-print(f"Predicción para [3, 7, 2024, 0.4991232, 22.29012]: {prediction}")
+print(f"Predicción para [9, 7, 2024]: {prediction} W")
